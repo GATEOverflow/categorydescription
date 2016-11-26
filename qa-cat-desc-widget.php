@@ -8,6 +8,7 @@ class qa_cat_descriptions_widget {
 				|| $template==='unanswered'
 				|| $template==='activity'
 				|| $template==='hot'
+				|| $template==='qa'
 		       );
 	}
 
