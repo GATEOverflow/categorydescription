@@ -24,7 +24,7 @@ class qa_cat_descriptions_widget {
 		$parts=explode('/', $request);
 		$category = null;
 		$category=$parts[count($parts) - 1];
-		if($category == null || count($parts) == 1)
+		if($category == null || count($parts) == 1 && $template != 'qa' )
 			return;
 		$result = qa_db_query_sub("select categoryid from ^categories where tags like $",$category);
 		$catid = qa_db_read_one_value($result);
