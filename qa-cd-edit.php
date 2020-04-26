@@ -34,12 +34,18 @@ class qa_cd_edit_page
 		if (qa_clicked('dosave')) {
 			require_once QA_INCLUDE_DIR.'qa-util-string.php';
 
-			qa_db_categorymeta_set($cat, 'description', qa_post_text('catdesc'));
+			qa_db_categorymeta_set($cat, 'description', qa_post_text('content'));
 			$select = "select  backpath from ^categories where categoryid = #";
 			$tagrow = qa_db_query_sub($select, $cat);
 			$backpath = qa_db_read_one_value($tagrow);
 			qa_redirect('questions/' . implode( '/', array_reverse(explode('/', $backpath)) ));
 		}
+$editorname = isset($in['editor']) ? $in['editor'] : qa_opt('editor_for_qs');
+$editor = qa_load_editor(qa_db_categorymeta_get($cat, 'description'), 'html', $editorname);
+$field = qa_editor_load_field($editor, $qa_content, qa_db_categorymeta_get($cat, 'description'), 'html', 'content', 12, false);
+                $field['label'] = $title.' Description:';
+                $field['error'] = qa_html(@$errors['content']);
+$field['value'] =qa_html(qa_db_categorymeta_get($cat, 'description'));
 
 		$qa_content['form']=array(
 				'tags' => 'METHOD="POST" ACTION="'.qa_self_html().'"',
@@ -48,13 +54,14 @@ class qa_cd_edit_page
 
 
 				'fields' => array(
-					array(
+'content' => $field
+		/*			array(
 						'label' => $title.' Description:',
 						'type' => 'text',
 						'rows' => 4,
 						'tags' => 'NAME="catdesc" ID="catdesc"',
 						'value' => qa_html(qa_db_categorymeta_get($cat, 'description')),
-					     ),
+					     ),*/
 
 					),
 				'hidden' => array(

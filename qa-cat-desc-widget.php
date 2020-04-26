@@ -27,7 +27,7 @@ class qa_cat_descriptions_widget {
 		if($category == null || count($parts) == 1 && $template != 'qa' )
 			return;
 		$result = qa_db_query_sub("select categoryid from ^categories where tags like $",$category);
-		$catid = qa_db_read_one_value($result);
+		$catid = qa_db_read_one_value($result, true);
 		$description=qa_db_categorymeta_get($catid, 'description');
 		if (!(qa_opt('plugin_tag_desc_sidebar_html'))) $description=qa_html($description);
 		$param['catid'] = $catid;
@@ -36,7 +36,8 @@ class qa_cat_descriptions_widget {
 		$allowediting=!qa_user_permit_error('plugin_cat_desc_permit_edit');
 
 		if (strlen($description)) {
-			echo '<SPAN CLASS="qa-cat-description" STYLE="font-size:'.(int)qa_opt('plugin_cat_desc_font_size').'px;">';
+			//echo '<SPAN CLASS="qa-cat-description" STYLE="font-size:'.(int)qa_opt('plugin_cat_desc_font_size').'px;">';
+			echo '<SPAN CLASS="qa-cat-description">';
 			echo $description;
 			echo '</SPAN>';
 			if ($allowediting)
