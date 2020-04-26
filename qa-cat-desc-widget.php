@@ -49,9 +49,6 @@ class qa_cat_descriptions_widget {
 
 	function option_default($option)
 	{
-		if ($option=='plugin_cat_desc_max_len')
-			return 250;
-
 		if ($option=='plugin_cat_desc_font_size')
 			return 18;
 		if ($option=='plugin_cat_desc_permit_edit') {
@@ -72,11 +69,12 @@ class qa_cat_descriptions_widget {
 		$saved=false;
 
 		if (qa_clicked('plugin_cat_desc_save_button')) {
-			qa_opt('plugin_cat_desc_max_len', (int)qa_post_text('plugin_cat_desc_ml_field'));
 			qa_opt('plugin_cat_desc_font_size', (int)qa_post_text('plugin_cat_desc_fs_field'));
 			qa_opt('plugin_cat_desc_permit_edit', (int)qa_post_text('plugin_cat_desc_pe_field'));
+			qa_opt('plugin_tag_desc_sidebar_html', (bool)qa_post_text('plugin_cat_desc_sh_check'));
 			$saved=true;
 		}
+
 		return array(
 				'ok' => $saved ? 'Category descriptions settings saved' : null,
 
@@ -95,6 +93,13 @@ class qa_cat_descriptions_widget {
 						'value' => @$permitoptions[qa_opt('plugin_cat_desc_permit_edit')],
 						'options' => $permitoptions,
 						'tags' => 'NAME="plugin_cat_desc_pe_field"',
+					     ),
+
+				    array(
+						'label' => 'Allow html in description',
+						'type' => 'checkbox',
+						'value' => (bool)qa_opt('plugin_tag_desc_sidebar_html'),
+						'tags' => 'NAME="plugin_cat_desc_sh_check"',
 					     ),
 					),
 

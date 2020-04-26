@@ -65,9 +65,14 @@ class qa_cd_create_page
 						'label' => 'Categories:',
 						'type' => 'select',
 						'options' => $cat_names,
-						'tags' => 'NAME="catid" ID="catid" onchange="this.form.submit()"',
+						'tags' => 'NAME="catid" ID="catid"',
 					     ),
 					),
+				'buttons' => array(
+					 array(
+						'label' => qa_lang_html('plugin_cat_desc/select'),
+					),
+				),
 				);
 
 		$qa_content['focusid']='catid';
