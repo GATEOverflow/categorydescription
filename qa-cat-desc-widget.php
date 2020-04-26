@@ -48,9 +48,6 @@ class qa_cat_descriptions_widget {
 
 	function option_default($option)
 	{
-		if ($option=='plugin_cat_desc_max_len')
-			return 250;
-
 		if ($option=='plugin_cat_desc_font_size')
 			return 18;
 		if ($option=='plugin_cat_desc_permit_edit') {
@@ -71,7 +68,6 @@ class qa_cat_descriptions_widget {
 		$saved=false;
 
 		if (qa_clicked('plugin_cat_desc_save_button')) {
-			qa_opt('plugin_cat_desc_max_len', (int)qa_post_text('plugin_cat_desc_ml_field'));
 			qa_opt('plugin_cat_desc_font_size', (int)qa_post_text('plugin_cat_desc_fs_field'));
 			qa_opt('plugin_cat_desc_permit_edit', (int)qa_post_text('plugin_cat_desc_pe_field'));
 			$saved=true;
