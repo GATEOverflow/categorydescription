@@ -29,7 +29,7 @@ class qa_cat_descriptions_widget {
 		$result = qa_db_query_sub("select categoryid from ^categories where tags like $",$category);
 		$catid = qa_db_read_one_value($result, true);
 		$description=qa_db_categorymeta_get($catid, 'description');
-		if (!(qa_opt('plugin_tag_desc_sidebar_html'))) $description=qa_html($description);
+		if (!(qa_opt('plugin_cat_desc_html'))) $description=qa_html($description);
 		$param['catid'] = $catid;
 		$editurlhtml=qa_path('edit-cd', $param);
 
@@ -51,6 +51,8 @@ class qa_cat_descriptions_widget {
 	{
 		if ($option=='plugin_cat_desc_font_size')
 			return 18;
+		if ($option=='plugin_cat_desc_html')
+			return 1;
 		if ($option=='plugin_cat_desc_permit_edit') {
 			require_once QA_INCLUDE_DIR.'qa-app-options.php';
 			return QA_PERMIT_EXPERTS;
@@ -71,7 +73,7 @@ class qa_cat_descriptions_widget {
 		if (qa_clicked('plugin_cat_desc_save_button')) {
 			qa_opt('plugin_cat_desc_font_size', (int)qa_post_text('plugin_cat_desc_fs_field'));
 			qa_opt('plugin_cat_desc_permit_edit', (int)qa_post_text('plugin_cat_desc_pe_field'));
-			qa_opt('plugin_tag_desc_sidebar_html', (bool)qa_post_text('plugin_cat_desc_sh_check'));
+			qa_opt('plugin_cat_desc_html', (bool)qa_post_text('plugin_cat_desc_sh_check'));
 			$saved=true;
 		}
 
@@ -98,7 +100,7 @@ class qa_cat_descriptions_widget {
 				    array(
 						'label' => 'Allow html in description',
 						'type' => 'checkbox',
-						'value' => (bool)qa_opt('plugin_tag_desc_sidebar_html'),
+						'value' => (bool)qa_opt('plugin_cat_desc_html'),
 						'tags' => 'NAME="plugin_cat_desc_sh_check"',
 					     ),
 					),
