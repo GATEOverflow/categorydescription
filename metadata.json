@@ -1,13 +1,13 @@
 {
   "name": "Category Description",
-  "uri": "https://github.com/arjunsuresh/categorydescription",
+  "uri": "https://github.com/gateoverflow/categorydescription",
   "description": "Adds option to enter a description (allows HTML) for categories which can be shown on top of question pages for the category",
   "version": "1.0",
   "date": "2016-08-15",
   "author": "Arjun Suresh",
   "author_uri": "http://armi.in/arjun",
   "license": "GPLv2",
-  "update_uri": "https://raw.githubusercontent.com/arjunsuresh/categorydescription/master/metadata.json",
+  "update_uri": "https://raw.githubusercontent.com/gateoverflow/categorydescription/master/metadata.json",
   "min_q2a": "1.5",
   "min_php": "5.1.6"
   "load_order": "after_db_init"

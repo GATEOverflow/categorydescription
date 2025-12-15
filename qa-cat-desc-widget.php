@@ -19,6 +19,7 @@ class qa_cat_descriptions_widget {
 
 	function output_widget($region, $place, $themeobject, $template, $request, $qa_content)
 	{
+		if(qa_is_mobile_probably()) return;
 		require_once QA_INCLUDE_DIR.'qa-db-metas.php';
 
 		$parts=explode('/', $request);
