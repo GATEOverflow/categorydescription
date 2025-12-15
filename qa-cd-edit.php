@@ -35,6 +35,7 @@ class qa_cd_edit_page
 			require_once QA_INCLUDE_DIR.'qa-util-string.php';
 
 			qa_db_categorymeta_set($cat, 'description', qa_post_text('content'));
+			qa_db_categorymeta_set($cat, 'image', qa_post_text('cat_image'));
 			$select = "select  backpath from ^categories where categoryid = #";
 			$tagrow = qa_db_query_sub($select, $cat);
 			$backpath = qa_db_read_one_value($tagrow);
@@ -47,6 +48,13 @@ $field = qa_editor_load_field($editor, $qa_content, qa_db_categorymeta_get($cat,
                 $field['error'] = qa_html(@$errors['content']);
 $field['value'] =qa_html(qa_db_categorymeta_get($cat, 'description'));
 
+$image_field = array(
+    'label' => $title . ' Image URL:',
+    'type'  => 'text',
+    'tags'  => 'NAME="cat_image" ID="cat_image"',
+    'value' => qa_html(qa_db_categorymeta_get($cat, 'image')),
+);
+
 		$qa_content['form']=array(
 				'tags' => 'METHOD="POST" ACTION="'.qa_self_html().'"',
 
@@ -54,6 +62,9 @@ $field['value'] =qa_html(qa_db_categorymeta_get($cat, 'description'));
 
 
 				'fields' => array(
+
+'image'   => $image_field,
+				
 'content' => $field
 		/*			array(
 						'label' => $title.' Description:',
